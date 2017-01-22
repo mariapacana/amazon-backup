@@ -21,8 +21,8 @@ decrypt_and_uncompress() {
   exit 1
   fi
 	openssl rsautl -decrypt -inkey $1 -in $2 -out key.bin 
-	mkdir recovered_backup
-	openssl enc -d -aes-256-cbc -in $3 -out /dev/stdout -pass file:./key.bin | tar -zxvf /dev/stdin -C recovered_backup
+	mkdir amazon_backup_decrypted
+	openssl enc -d -aes-256-cbc -in $3 -out /dev/stdout -pass file:./key.bin | tar -zxvf /dev/stdin -C amazon_backup_decrypted
 	rm key.bin
 }
 
