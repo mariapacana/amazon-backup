@@ -9,8 +9,8 @@ upload() {
 	AMAZON_S3_DIR=$3
 
 	if [ $# -lt 3 ]; then
-  	echo 1>&2 "$0: Not enough arguments. 'upload [source-dir] [/path/to/publickey] [s3-folder]'"
-  	exit 1
+		echo 1>&2 "$0: Not enough arguments. 'upload [source-dir] [/path/to/publickey] [s3-folder]'"
+		exit 1
   fi
 
   compress_and_encrypt $BACKUP_SOURCE_DIR $BACKUP_DEST_DIR $PUBLICKEY
@@ -25,7 +25,7 @@ download() {
   BACKUP_DEST_DIR="$3"-backup
 
 	if [ $# -lt 3 ]; then
-  	echo 1>&2 "$0: Not enough arguments. 'download [amazon-source-dir] [/path/to/privatekey] [dest-folder]'"
+		echo 1>&2 "$0: Not enough arguments. 'download [amazon-source-dir] [/path/to/privatekey] [dest-folder]'"
     exit 1
 	fi
 
