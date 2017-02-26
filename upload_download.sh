@@ -20,12 +20,16 @@ upload() {
 
 
 download() {
-	if [ $# -lt 1 ]; then
-  	echo 1>&2 "$0: Not enough arguments. Need path to private key"
+  AMAZON_SOURCE_DIR=$1
+	PRIVATE_KEY=$2
+  BACKUP_DEST_DIR="$3"-backup
+
+	if [ $# -lt 3 ]; then
+  	echo 1>&2 "$0: Not enough arguments. 'download [amazon-source-dir] [/path/to/privatekey] [dest-folder]'"
     exit 1
 	fi
-	mkdir amazon_backup_encrypted
-  s3cmd get s3://sibilance-backup/backup/backup.enc amazon_backup_encrypted
-	s3cmd get s3://sibilance-backup/backup/key.bin.enc amazon_backup_encrypted
-  decrypt_and_uncompress $1 amazon_backup_encrypted/key.bin.enc amazon_backup_encrypted/backup.enc
+
+  s3cmd get "$AMAZON_SOURCE_DIR"/backup.enc $BACKUP_DEST_DIR
+	s3cmd get "$AMAZON_DEST_DIR"/key.bin.enc $BACKUP_DEST_DIR
+  decrypt_and_uncompress $PRIVATEKEY "$BACKUP_DEST_DIR"/key.bin.enc "$BACKUP_DEST_DIR"/backup.enc
 }
