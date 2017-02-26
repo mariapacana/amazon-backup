@@ -11,7 +11,7 @@ openssl rand -hex -out ~/Desktop/sym_keyfile.key 128
 ./ssss-combine -x -t 3 (to verify that SSSS worked)
 ```
 
-### Generate Encrypted Private Key
+### Generate Private Key (Encrypted with Symmetric Key)
 ```
 openssl genrsa -out private.pem -passout file:sym_keyfile.key -des3 2048
 ```
